@@ -1,0 +1,10 @@
+{
+  "name": "@speedtracker/api",
+  "version": "0.13.0",
+  "main": "index.js",
+  "dependencies": {
+    "request": "^2.88.0",
+    "sha1": "^1.1.1",
+    "webpagetest": "^0.3.9"
+  }
+}
