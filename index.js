@@ -168,8 +168,6 @@ Controller.prototype.processResult = function ({callback, id, key, profile: prof
     }) 
   }
 
-  const url = profile.parameters.url
-
   this.wpt.getTestResults(id, null, (err, wptResponse) => {
     if (err) {
       return callback(null, {
