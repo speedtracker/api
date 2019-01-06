@@ -216,7 +216,7 @@ Controller.prototype.runTest = function ({callback, profile: profileName}) {
         statusCode: 404,
         body: JSON.stringify({
           error: 'Invalid profile'
-        }
+        })
       })
     }
   }
