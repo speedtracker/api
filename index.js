@@ -178,9 +178,7 @@ Controller.prototype.processResult = function ({callback, id, key, profile: prof
       })  
     }
 
-    let result = this.buildResultsObject({
-      wpt: wptResponse.data
-    })
+    let result = this.buildResultsObject(wptResponse.data)
 
     return this.dataStore.insert({
       data: result,
