@@ -4,17 +4,20 @@ const sha1 = require('sha1')
 const url = require('url')
 const WebPageTest = require('webpagetest')
 
+const DEFAULT_PROFILE_NAME = 'default'
 const WPT_URL = 'https://www.webpagetest.org'
 
 const Controller = function ({
   baseUrl,
   config,
   database,
+  defaultProfileUrl,
   wptApiKey
 }) {
   this.baseUrl = baseUrl
   this.config = config || {}
   this.dataStore = new DataStore(database)
+  this.defaultProfileUrl = defaultProfileUrl
   this.wptApiKey = wptApiKey
 
   const wptUrl = this.config.wptUrl || WPT_URL
@@ -156,7 +159,7 @@ Controller.prototype.processResult = function ({callback, id, key, profile: prof
   const {profiles = []} = this.config
   const profile = profiles[profileName]
 
-  if (!profile) {
+  if (!profile && profileName !== DEFAULT_PROFILE_NAME) {
     return callback(null, {
       statusCode: 404,
       body: JSON.stringify({
@@ -195,15 +198,27 @@ Controller.prototype.processResult = function ({callback, id, key, profile: prof
 
 Controller.prototype.runTest = function ({callback, profile: profileName}) {
   const {profiles = []} = this.config
-  const profile = profiles[profileName]
+  let profile = profiles[profileName]
 
   if (!profile) {
-    return callback(null, {
-      statusCode: 404,
-      body: JSON.stringify({
-        error: 'Invalid profile'
+    if (
+      profileName === DEFAULT_PROFILE_NAME &&
+      typeof this.defaultProfileUrl === 'string' &&
+      this.defaultProfileUrl.indexOf('http') === 0
+    ) {
+      profile = {
+        parameters: {
+          url: this.defaultProfileUrl
+        }
+      }
+    } else {
+      return callback(null, {
+        statusCode: 404,
+        body: JSON.stringify({
+          error: 'Invalid profile'
+        }
       })
-    }) 
+    }
   }
 
   const encryptedKey = sha1(this.wptApiKey)

@@ -1,6 +1,6 @@
 {
   "name": "@speedtracker/api",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "main": "index.js",
   "dependencies": {
     "request": "^2.88.0",
