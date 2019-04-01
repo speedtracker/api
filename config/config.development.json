@@ -1,0 +1,33 @@
+{
+  "datastore": "@dadi/api-mongodb",
+  "app": {
+    "name": "SpeedTracker API"
+  },
+  "server": {
+    "host": "0.0.0.0",
+    "port": "3095",
+    "protocol": "http"
+  },
+  "publicUrl": {
+    "host": "staging.speedtracker.org",
+    "port": 80
+  },
+  "caching": {
+    "directory": {
+      "enabled": true,
+      "path": "./cache/api"
+    },
+    "redis": {
+      "enabled": false
+    }
+  },
+  "media": {
+    "storage": "disk",
+    "basePath": "workspace/media"
+  },
+  "env": "development",
+  "auth": {
+    "datastore": "@dadi/api-mongodb",
+    "database": "speedtrackerapi"
+  }
+}
