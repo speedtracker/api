@@ -1,10 +1,8 @@
 {
-  "name": "@speedtracker/api",
-  "version": "0.17.0",
-  "main": "index.js",
+  "name": "speedtracker-api",
+  "main": "server.js",
   "dependencies": {
-    "request": "^2.88.0",
-    "sha1": "^1.1.1",
-    "webpagetest": "^0.3.9"
+    "@dadi/api": "4.x",
+    "@dadi/api-mongodb": "^4.2.2"
   }
 }
